@@ -16,7 +16,7 @@ public interface UsersService {
 		void loginProcess(UsersDto dto, HttpSession session);
 		void getInfo(HttpSession session, ModelAndView mView);
 		void updateUserPwd(HttpSession session, UsersDto dto, ModelAndView mView);
-public  Map<String, Object> saveProfileImage(HttpServletRequest request, 
+		public  Map<String, Object> saveProfileImage(HttpServletRequest request, 
 		         MultipartFile mFile);
 		void updateUser(UsersDto dto, HttpSession session);
 		void deleteUser(HttpSession session, ModelAndView mView);

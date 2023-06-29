@@ -55,6 +55,43 @@
          <exclude-mapping path="/users/login"/>
          <beans:ref bean="loginInterceptor"/>
       </interceptor>
+      <!-- file에 모든 용청   
+      		목록보기와 다운로드 빼고 인터셉터가 관여하기로 되어있다 -->
+      <interceptor>
+      	<mapping path="/file/*"/>
+      	<exclude-mapping path="/file/list"/>
+      	<exclude-mapping path="/file/download"/>
+      	<beans:ref bean="loginInterceptor"/>
+      </interceptor>
+        <interceptor>
+	      	<mapping path="/cafe/*"/>
+	      	<exclude-mapping path="/cafe/list"/>
+	      	<exclude-mapping path="/cafe/detail"/>
+	      	<exclude-mapping path="/cafe/ajax_comment_list"/>
+	      	<beans:ref bean="loginInterceptor"/>
+      </interceptor>
+    
    </interceptors>
 	
+	
+	   <!-- 
+      Multipart 폼 전송 처리를 위한 bean 설정 
+      최대 업로드 사이즈 제한하기 
+      name="maxUploadSize"  value="byte 단위" 
+   -->
+   <beans:bean id="multipartResolver"
+      class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <beans:property name="maxUploadSize" value="102400000"/>
+   </beans:bean>
+   
+   <!-- 
+   		bean의 이름을 이용해서 view로 이동할수 있도록 설정
+   		setOrder(0) 는 0순위로 찾아 가겠다는 의미
+   		0순위로 찾아서 없으면 views 폴더 안에서 jsp 페이지를 찾게 된다.
+    -->
+   <!-- xxx= new BeanNameViewResolver();    xxx.setOrder(0) -->
+   <beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+   		<beans:property name="order" value="0"/> <!-- 0순위로 정렬해라 -->
+   </beans:bean>
+   
 </beans:beans>
