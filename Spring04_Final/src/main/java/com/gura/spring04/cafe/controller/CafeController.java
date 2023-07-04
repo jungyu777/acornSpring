@@ -1,5 +1,8 @@
 package com.gura.spring04.cafe.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,17 +10,79 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gura.spring04.cafe.dto.CafeCommentDto;
 import com.gura.spring04.cafe.dto.CafeDto;
 import com.gura.spring04.cafe.service.CafeService;
 import com.gura.spring04.file.dto.FileDto;
 
+import oracle.net.aso.m;
+
 
 @Controller
 public class CafeController {
-	@Autowired
-	private CafeService service;
+		@Autowired
+		private CafeService service;
+		
+		//댓글 수정요청처리(JSON을 응답하도록 한다)
+		@RequestMapping("/cafe/comment_update")
+		@ResponseBody
+		public Map<String, Object> commentUpdate(CafeCommentDto dto){
+			service.updateComment(dto);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("isSuccess", true);
+			//("isSuccess", true) JSON 문자열이 응답되도록 한다.
+			return map;
+		}
+		
+		//댓글 삭제 요청 처리
+		@RequestMapping("/cafe/comment_delete")
+		@ResponseBody
+		public Map<String, Object> commentDelete(HttpServletRequest request){
+			service.deleteComment(request);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("isSuccess", true);
+			//{isSuccess : true} 형식의 JSON 문자열이 응답되도록한다.
+			return map;
+			
+		}
+		
+		//새로운 댓글 저장 요청 처리
+		@RequestMapping("/cafe/comment_insert")
+		public String commentInsert(HttpServletRequest requset, int ref_group) {
+			//새로운 댓글을 저장하는로직을 수행한다
+			service.saveComment(requset);
+			//ref_group 은 원글의 글번호이기 떄문에 원글 자세히 보기로 다시 리다일렉트 이동된다.
+			return "redirect:/cafe/detail?num="+ref_group;
+		}
+		
+		//댓글 더보기 요청처리
+		@RequestMapping("/cafe/ajax_comment_list")
+		public String commentList(HttpServletRequest request) {
+			//테스르르 위해 시간 지연시키ㅣㄱ
+			try {
+				Thread.sleep(3000);
+			}catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+			service.moreCommentList(request);
+			return"cafe/ajax_comment_list";
+		 }
+		
+		
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	   @RequestMapping("/cafe/list")
 	   public String list(HttpServletRequest request) {

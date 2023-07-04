@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>/views/cafe/insertform.jsp</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
 	textarea{
 		width: 768px;
@@ -14,7 +16,7 @@
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container animate__animated animate__heartBeat">
 		<h3>새글 작성 폼입니다.</h3>
 		<form action="insert" method="post">
 			<div>

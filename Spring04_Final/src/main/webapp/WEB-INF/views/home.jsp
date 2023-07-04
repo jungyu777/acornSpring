@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>/home.jsp</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
-	<div class="container">
+	<div class="container animate__animated animate__flip">
 		<c:choose>
 			<c:when test="${empty sessionScope.id }">
 				<a href="${pageContext.request.contextPath}/users/loginform">로그인</a>
@@ -27,6 +28,7 @@
 		
 			<li><a href="file/list">자료실 목록보기</a></li>
 			<li><a href="${pageContext.request.contextPath }/cafe/list">글 목록보기</a></li>
+			<li><a href="${pageContext.request.contextPath }/gallery/list">갤러리 목록보기</a></li>
 		</ul>
 		<h2>공지사항</h2>
 		<ul>
