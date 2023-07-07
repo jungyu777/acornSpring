@@ -52,25 +52,26 @@
 </head>
 <body>
 <div class="container">
-      <a href="${pageContext.request.contextPath}/gallery/upload_form">사진 업로드 하러 가기</a>
+      <a href="${pageContext.request.contextPath}/shop/upload_form">상품 업로드 하러 가기</a>
       <br />
-      <a href="${pageContext.request.contextPath}/gallery/upload_form2">사진 업로드 하러 가기2</a>
+      
       <br />
-      <a href="${pageContext.request.contextPath}/gallery/upload_form3">사진 업로드 하러 가기3</a>
-      <h1>겔러리 목록 입니다.</h1>
+      
+      <h1>상품 목록 입니다.</h1>
       <div class="row">
       <c:forEach var="tmp" items="${list }">
          <div class="col-6 col-md-4 col-lg-3">
                <div class="card mb-3">
-                  <a href="${pageContext.request.contextPath}/gallery/detail?num=${tmp.num}">
+                  <a href="${pageContext.request.contextPath}/shop/detail?num=${tmp.num}">
                         <div class="img-wrapper">
                            <img class="card-img-top" src="${pageContext.request.contextPath }${tmp.imagePath}" />
                         </div>
                   </a>
-                  <div class="card-body">
-                        <p class="card-text">${tmp.caption}</p>
-                        <p class="card-text">by <strong>${tmp.writer}</strong></p>
+                  <div >
+                        <p >${tmp.name}</p>
+                        <p >가격 : <strong>${tmp.price}</strong></p>
                         <p><small>${tmp.regdate}</small></p>
+                        <p><strong>제고 : </strong>${tmp.remainCount }</p>
                   </div>
                </div>
             </div>
@@ -81,7 +82,7 @@
       <c:choose>
          <c:when test="${startPageNum ne 1 }">
             <li class="page-item">
-                     <a class="page-link" href="${pageContext.request.contextPath}/gallery/list?pageNum=${startPageNum - 1}">Prev</a>
+                     <a class="page-link" href="${pageContext.request.contextPath}/shop/list?pageNum=${startPageNum - 1}">Prev</a>
                </li>
          </c:when>
          <c:otherwise>
@@ -94,12 +95,12 @@
          <c:choose>
             <c:when test="${i eq pageNum }">
                <li class="page-item active">
-                        <a class="page-link" href="${pageContext.request.contextPath}/gallery/list?pageNum=${i}">${i }</a>
+                        <a class="page-link" href="${pageContext.request.contextPath}/shop/list?pageNum=${i}">${i }</a>
                      </li>
             </c:when>
             <c:otherwise>
                <li class="page-item">
-                        <a class="page-link" href="${pageContext.request.contextPath}/gallery/list?pageNum=${i}">${i}</a>
+                        <a class="page-link" href="${pageContext.request.contextPath}/shop/list?pageNum=${i}">${i}</a>
                      </li>
             </c:otherwise>
          </c:choose>
@@ -107,7 +108,7 @@
       <c:choose>
          <c:when test="${endPageNum lt totalPageCount }">
             <li class="page-item">
-                     <a class="page-link" href="${pageContext.request.contextPath}/gallery/list?pageNum=${endPageNum + 1}">Next</a>
+                     <a class="page-link" href="${pageContext.request.contextPath}/shop/list?pageNum=${endPageNum + 1}">Next</a>
                </li>
          </c:when>
          <c:otherwise>

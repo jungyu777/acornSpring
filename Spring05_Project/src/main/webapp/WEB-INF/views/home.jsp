@@ -25,18 +25,10 @@
 		
 		<h1>인덱스 페이지 입니다.</h1>
 		<ul>
-		
-			<li><a href="file/list">자료실 목록보기</a></li>
-			<li><a href="${pageContext.request.contextPath }/cafe/list">글 목록보기</a></li>
-			<li><a href="${pageContext.request.contextPath }/gallery/list">갤러리 목록보기</a></li>
 			<li><a href="${pageContext.request.contextPath }/shop/list">상품목록</a></li>
+			<li><a href="${pageContext.request.contextPath }/client/list">상품주문</a></li>
 		</ul>
-		<h2>공지사항</h2>
-		<ul>
-			<c:forEach var="tmp" items="${requestScope.noticeList }">
-				<li>${tmp }</li>
-			</c:forEach>
-		</ul>
+		
 	</div>
 </body>
 </html>

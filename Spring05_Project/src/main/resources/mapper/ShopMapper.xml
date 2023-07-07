@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop">
+ <select id="getList" parameterType="shopDto" resultType="shopDto">
+      SELECT *
+      FROM   
+         (SELECT result1.*, ROWNUM as rnum
+         FROM
+            (SELECT num, name, price, remainCount,imagePath, regdate
+            FROM shop
+            ORDER BY num DESC) result1)
+      
+   </select>  
+   <select id="getCount" resultType="int">
+      SELECT NVL(MAX(ROWNUM), 0)
+      FROM shop
+   </select>
+   <insert id="insert" parameterType="shopDto">
+      INSERT INTO shop
+      (num, name, price, remainCount,imagePath, regdate)
+      VALUES(shop_seq.NEXTVAL, #{name}, #{price}, #{remainCount},  #{imagePath}, SYSDATE)
+   </insert>
+   <select id="getData" parameterType="int" resultType="shopDto">
+      SELECT *
+      FROM
+         (SELECT num, name, price, remainCount,imagePath, regdate, 
+            LAG(num, 1, 0) OVER (ORDER BY num DESC) AS prevNum,
+            LEAD(num, 1, 0) OVER (ORDER BY num DESC) AS nextNum
+         FROM shop
+         ORDER BY num DESC)
+      WHERE num = #{num}
+   </select>
+   
+ 
+   <update id="addViewCount" parameterType="int">
+      UPDATE shop
+      SET remainCount=remainCount+1
+      WHERE num=#{num}
+   </update>
+   
+   <delete id="delete" parameterType="int">
+      DELETE FROM shop
+      WHERE num=#{num}
+   </delete>
+</mapper>
+
+
+
+
+
+
+
+

@@ -52,6 +52,8 @@ CREATE TABLE shop(
     name VARCHAR2(30), --상품이름
     price NUMBER, --상품가격
     remainCount NUMBER CHECK(remainCount >= 0) --재고갯수 
+    imagePath VARCHAR2(100), -- 업로드된 이미지의 경로  ex) /resources/upload/xxx.jpg
+    regdate DATE -- 이미지 업로드 날짜 
 );
 CREATE SEQUENCE shop_seq;
 
